@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayCkoX | Build Your Container</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, #39115e, transparent 35%),
+        radial-gradient(circle at bottom left, #10275c, transparent 40%),
+        #070710;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ffffff20;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      color: #ffd84d;
+    }
+
+    .logo span {
+      color: #b966ff;
+    }
+
+    .coins {
+      background: #ffffff10;
+      border: 1px solid #ffd84d70;
+      padding: 10px 18px;
+      border-radius: 25px;
+      color: #ffd84d;
+      font-weight: bold;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 0;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: .95;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #ffd84d;
+    }
+
+    .hero p {
+      color: #c6c6d6;
+      font-size: 18px;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .game {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 25px;
+    }
+
+    .panel {
+      background: #ffffff0d;
+      border: 1px solid #ffffff1c;
+      border-radius: 22px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+    }
+
+    .panel h2 {
+      margin-bottom: 20px;
+    }
+
+    .label {
+      color: #aaaabd;
+      margin: 22px 0 10px;
+      font-size: 14px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      border: 1px solid #ffffff28;
+      background: #161624;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover,
+    button.active {
+      background: #7a32cc;
+      border-color: #b966ff;
+    }
+
+    .container-stage {
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 900px;
+    }
+
+    .shipping-container {
+      width: 80%;
+      height: 180px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #145c83 0px,
+          #145c83 18px,
+          #0d4567 20px,
+          #0d4567 24px
+        );
+      border: 5px solid #092e46;
+      box-shadow: 0 30px 60px #00000080;
+      position: relative;
+      transition: .4s;
+      transform: rotateY(-8deg);
+    }
+
+    .shipping-container::before {
+      content: "PLAYCKOX";
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #ffffffbb;
+    }
+
+    .window {
+      display: none;
+      position: absolute;
+      width: 80px;
+      height: 65px;
+      background: linear-gradient(135deg, #85d8ff, #19334d);
+      border: 6px solid #eee;
+      right: 35px;
+      top: 55px;
+    }
+
+    .door {
+      display: none;
+      position: absolute;
+      width: 58px;
+      height: 115px;
+      background: #272733;
+      border: 5px solid #eee;
+      left: 45px;
+      bottom: 0;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 15px;
+      background: #00000030;
+    }
+
+    .status strong {
+      color: #ffd84d;
+    }
+
+    .finish {
+      width: 100%;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #7b2cff, #c445ff);
+      border: 0;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #77778c;
+    }
+
+    @media(max-width: 750px) {
+      .game {
+        grid-template-columns: 1fr;
+      }
+
+      .shipping-container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">PLAY<span>CKOX</span></div>
+  <div class="coins">🪙 <span id="coins">0</span> PlayKoins</div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>BUILD YOUR <span>CONTAINER</span></h1>
+    <p>
+      Diseña tu propio contenedor, desbloquea opciones y gana PlayKoins
+      mientras construyes tu idea.
+    </p>
+  </section>
+
+  <section class="game">
+
+    <div class="panel">
+
+      <h2>🎮 Personaliza tu proyecto</h2>
+
+      <div class="label">TAMAÑO</div>
+      <div class="options">
+        <button onclick="chooseSize(this,'20 FT')">20 FT</button>
+        <button onclick="chooseSize(this,'40 FT')">40 FT</button>
+        <button onclick="chooseSize(this,'45 FT')">45 FT</button>
+      </div>
+
+      <div class="label">¿QUÉ QUIERES CONSTRUIR?</div>
+      <div class="options">
+        <button onclick="chooseUse(this,'Oficina')">🏢 Oficina</button>
+        <button onclick="chooseUse(this,'Casa')">🏠 Casa</button>
+        <button onclick="chooseUse(this,'Bar')">🍹 Bar</button>
+        <button onclick="chooseUse(this,'Tienda')">🛍️ Tienda</button>
+      </div>
+
+      <div class="label">MODIFICACIONES</div>
+      <div class="options">
+        <button onclick="addWindow(this)">🪟 Ventana</button>
+        <button onclick="addDoor(this)">🚪 Puerta</button>
+        <button onclick="reward(this,'❄️ A/C')">❄️ A/C</button>
+        <button onclick="reward(this,'⚡ Electricidad')">⚡ Electricidad</button>
+        <button onclick="reward(this,'🚿 Baño')">🚿 Baño</button>
+      </div>
+
+      <div class="status">
+        Tamaño: <strong id="size">Sin elegir</strong><br>
+        Proyecto: <strong id="use">Sin elegir</strong>
+      </div>
+
+      <button class="finish" onclick="finishDesign()">
+        TERMINAR MI DISEÑO 🚀
+      </button>
+
+    </div>
+
+    <div class="panel">
+
+      <h2>🏗️ Tu contenedor</h2>
+
+      <div class="container-stage">
+        <div class="shipping-container" id="container">
+          <div class="door" id="door"></div>
+          <div class="window" id="window"></div>
+        </div>
+      </div>
+
+      <div class="status" id="message">
+        Empieza seleccionando el tamaño de tu contenedor.
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  PlayCkoX • Powered by FranckoX
+</footer>
+
+<script>
+  let coins = 0;
+  let size = "";
+  let use = "";
+
+  function addCoins(amount) {
+    coins += amount;
+    document.getElementById("coins").textContent = coins;
+  }
+
+  function activate(button) {
+    button.classList.add("active");
+  }
+
+  function chooseSize(button, value) {
+    size = value;
+    document.getElementById("size").textContent = value;
+
+    const container = document.getElementById("container");
+
+    if (value === "20 FT") container.style.width = "60%";
+    if (value === "40 FT") container.style.width = "80%";
+    if (value === "45 FT") container.style.width = "90%";
+
+    activate(button);
+    addCoins(25);
+
+    document.getElementById("message").innerHTML =
+      "✅ Seleccionaste <strong>" + value + "</strong>. +25 PlayKoins";
+  }
+
+  function chooseUse(button, value) {
+    use = value;
+    document.getElementById("use").textContent = value;
+
+    activate(button);
+    addCoins(50);
+
+    document.getElementById("message").innerHTML =
+      "🎯 Proyecto seleccionado: <strong>" + value + "</strong>. +50 PlayKoins";
+  }
+
+  function addWindow(button) {
+    document.getElementById("window").style.display = "block";
+    reward(button, "🪟 Ventana");
+  }
+
+  function addDoor(button) {
+    document.getElementById("door").style.display = "block";
+    reward(button, "🚪 Puerta");
+  }
+
+  function reward(button, item) {
+    if (!button.classList.contains("active")) {
+      activate(button);
+      addCoins(15);
+
+      document.getElementById("message").innerHTML =
+        item + " añadida. <strong>+15 PlayKoins</strong>";
+    }
+  }
+
+  function finishDesign() {
+    if (!size || !use) {
+      alert("Primero selecciona el tamaño y el tipo de proyecto.");
+      return;
+    }
+
+    addCoins(100);
+
+    document.getElementById("message").innerHTML =
+      "🏆 ¡Diseño completado! Ganaste <strong>+100 PlayKoins</strong>.<br><br>" +
+      "Tu " + use + " de " + size +
+      " está lista para el próximo nivel.<br><br>" +
+      "💼 Próximamente: <strong>Solicitar cotización real con FranckoX.</strong>";
+  }
+</script>
+
+</body>
+</html>p
