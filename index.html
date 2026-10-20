@@ -1,222 +1,372 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlayCkoX | Build Your Container</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlayCkoX | Build Your Container</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top right, #39115e, transparent 35%),
-        radial-gradient(circle at bottom left, #10275c, transparent 40%),
-        #070710;
-      color: white;
-      min-height: 100vh;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    header {
-      padding: 22px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ffffff20;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top right,#39115e 0%,transparent 35%),
+    radial-gradient(circle at bottom left,#10275c 0%,transparent 40%),
+    #070710;
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
 
-    .logo {
-      font-size: 30px;
-      font-weight: 900;
-      color: #ffd84d;
-    }
+header{
+  padding:20px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ffffff20;
+  position:relative;
+  z-index:10;
+}
 
-    .logo span {
-      color: #b966ff;
-    }
+.logo{
+  font-size:30px;
+  font-weight:900;
+  color:#ffd840;
+}
 
-    .coins {
-      background: #ffffff10;
-      border: 1px solid #ffd84d70;
-      padding: 10px 18px;
-      border-radius: 25px;
-      color: #ffd84d;
-      font-weight: bold;
-    }
+.logo span{
+  color:#b966ff;
+}
 
-    main {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 55px 0;
-    }
+.coins{
+  background:#ffffff10;
+  border:1px solid #ffd84070;
+  padding:10px 18px;
+  border-radius:25px;
+  color:#ffd840;
+  font-weight:bold;
+}
 
-    .hero {
-      text-align: center;
-      margin-bottom: 45px;
-    }
+main{
+  width:90%;
+  max-width:1150px;
+  margin:auto;
+  padding:55px 0 80px;
+}
 
-    .hero h1 {
-      font-size: clamp(38px, 7vw, 70px);
-      line-height: .95;
-      margin-bottom: 20px;
-    }
+.hero{
+  text-align:center;
+  margin-bottom:45px;
+}
 
-    .hero h1 span {
-      color: #ffd84d;
-    }
+.hero h1{
+  font-size:clamp(38px,6vw,72px);
+  line-height:1;
+  margin-bottom:18px;
+}
 
-    .hero p {
-      color: #c6c6d6;
-      font-size: 18px;
-      max-width: 650px;
-      margin: auto;
-    }
+.hero h1 span{
+  color:#ffd840;
+}
 
-    .game {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 25px;
-    }
+.hero p{
+  color:#d8d8e8;
+  font-size:18px;
+  max-width:650px;
+  margin:auto;
+  line-height:1.5;
+}
 
-    .panel {
-      background: #ffffff0d;
-      border: 1px solid #ffffff1c;
-      border-radius: 22px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
-    }
+.game{
+  display:grid;
+  grid-template-columns:1fr 1.25fr;
+  gap:25px;
+  align-items:start;
+}
 
-    .panel h2 {
-      margin-bottom: 20px;
-    }
+.panel{
+  background:linear-gradient(145deg,#ffffff12,#ffffff08);
+  border:1px solid #ffffff22;
+  border-radius:25px;
+  padding:28px;
+  box-shadow:0 20px 60px #00000040;
+}
 
-    .label {
-      color: #aaaabd;
-      margin: 22px 0 10px;
-      font-size: 14px;
-    }
+.panel h2{
+  margin-bottom:25px;
+}
 
-    .options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+.label{
+  display:block;
+  color:#aeb0c7;
+  font-size:13px;
+  font-weight:bold;
+  margin:20px 0 10px;
+}
 
-    button {
-      border: 1px solid #ffffff28;
-      background: #161624;
-      color: white;
-      padding: 12px 17px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
 
-    button:hover,
-    button.active {
-      background: #7a32cc;
-      border-color: #b966ff;
-    }
+button{
+  border:1px solid #ffffff35;
+  background:#ffffff0d;
+  color:white;
+  padding:11px 16px;
+  border-radius:11px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+}
 
-    .container-stage {
-      min-height: 330px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 900px;
-    }
+button:hover{
+  transform:translateY(-2px);
+  border-color:#b966ff;
+}
 
-    .shipping-container {
-      width: 80%;
-      height: 180px;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          #145c83 0px,
-          #145c83 18px,
-          #0d4567 20px,
-          #0d4567 24px
-        );
-      border: 5px solid #092e46;
-      box-shadow: 0 30px 60px #00000080;
-      position: relative;
-      transition: .4s;
-      transform: rotateY(-8deg);
-    }
+button.active{
+  background:linear-gradient(135deg,#8d37ff,#dc55ff);
+  border-color:#e5b3ff;
+  box-shadow:0 5px 20px #a83dff55;
+}
 
-    .shipping-container::before {
-      content: "PLAYCKOX";
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      font-weight: 900;
-      letter-spacing: 3px;
-      color: #ffffffbb;
-    }
+.summary{
+  margin-top:25px;
+  background:#00000025;
+  border-radius:14px;
+  padding:16px;
+  line-height:1.7;
+}
 
-    .window {
-      display: none;
-      position: absolute;
-      width: 80px;
-      height: 65px;
-      background: linear-gradient(135deg, #85d8ff, #19334d);
-      border: 6px solid #eee;
-      right: 35px;
-      top: 55px;
-    }
+.progress{
+  height:11px;
+  background:#ffffff15;
+  border-radius:20px;
+  margin-top:20px;
+  overflow:hidden;
+}
 
-    .door {
-      display: none;
-      position: absolute;
-      width: 58px;
-      height: 115px;
-      background: #272733;
-      border: 5px solid #eee;
-      left: 45px;
-      bottom: 0;
-    }
+.progress-bar{
+  width:10%;
+  height:100%;
+  background:linear-gradient(90deg,#7c32ff,#ff54d8,#ffd840);
+  transition:.3s;
+}
 
-    .status {
-      margin-top: 20px;
-      padding: 18px;
-      border-radius: 15px;
-      background: #00000030;
-    }
+.preview{
+  min-height:500px;
+  display:flex;
+  flex-direction:column;
+}
 
-    .status strong {
-      color: #ffd84d;
-    }
+.stage{
+  flex:1;
+  min-height:330px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:900px;
+}
 
-    .finish {
-      width: 100%;
-      margin-top: 20px;
-      background: linear-gradient(90deg, #7b2cff, #c445ff);
-      border: 0;
-      font-size: 17px;
-    }
+.container-box{
+  width:78%;
+  height:190px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #069bc8 0px,
+      #069bc8 19px,
+      #057da5 20px,
+      #057da5 23px
+    );
+  border:5px solid #087596;
+  position:relative;
+  box-shadow:0 25px 40px #0008;
+  transition:.35s;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #77778c;
-    }
+.container-box.long{
+  width:90%;
+}
 
-    @media(max-width: 750px) {
-      .game {
-        grid-template-columns: 1fr;
-      }
+.container-box.extra{
+  width:98%;
+}
 
-      .shipping-container {
-        width: 95%;
-      }
-    }
-  </style>
+.brand{
+  position:absolute;
+  top:15px;
+  left:18px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.window{
+  display:none;
+  position:absolute;
+  right:18%;
+  top:55px;
+  width:70px;
+  height:70px;
+  border:6px solid white;
+  background:linear-gradient(135deg,#b9efff,#4084aa);
+}
+
+.door{
+  display:none;
+  position:absolute;
+  left:12%;
+  bottom:0;
+  width:58px;
+  height:110px;
+  border:6px solid white;
+  background:#536d7a;
+}
+
+.ac{
+  display:none;
+  position:absolute;
+  right:8%;
+  top:15px;
+  background:white;
+  color:#222;
+  padding:8px 13px;
+  border-radius:5px;
+  font-size:12px;
+}
+
+.light{
+  display:none;
+  position:absolute;
+  top:12px;
+  left:48%;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#fff7a5;
+  box-shadow:0 0 25px #ffe84f;
+}
+
+.bath{
+  display:none;
+  position:absolute;
+  bottom:12px;
+  right:8px;
+  background:#fff;
+  color:#333;
+  padding:7px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.message{
+  margin-top:15px;
+  min-height:55px;
+  padding:15px;
+  border-radius:12px;
+  background:#00000030;
+  color:#eee;
+}
+
+.finish{
+  display:block;
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  background:linear-gradient(135deg,#8e36ff,#df4dff);
+  border:none;
+  font-size:16px;
+}
+
+.quote{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  background:linear-gradient(135deg,#ffd84018,#9a40ff20);
+  border:1px solid #ffd84055;
+  border-radius:16px;
+  line-height:1.6;
+}
+
+.quote h3{
+  color:#ffd840;
+  margin-bottom:8px;
+}
+
+.quote-btn{
+  margin-top:12px;
+  background:#ffd840;
+  color:#111;
+  border:none;
+  width:100%;
+}
+
+.features{
+  margin-top:35px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:#ffffff0b;
+  border:1px solid #ffffff18;
+  border-radius:18px;
+  padding:22px;
+}
+
+.feature h3{
+  color:#ffd840;
+  margin-bottom:8px;
+}
+
+.feature p{
+  color:#bbbcd0;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  color:#85859a;
+  padding:35px 20px 50px;
+  border-top:1px solid #ffffff12;
+}
+
+@media(max-width:850px){
+  .game{
+    grid-template-columns:1fr;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    width:94%;
+    padding-top:35px;
+  }
+
+  .panel{
+    padding:20px;
+  }
+
+  .container-box{
+    width:90%;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -228,157 +378,231 @@
 
 <main>
 
-  <section class="hero">
-    <h1>BUILD YOUR <span>CONTAINER</span></h1>
-    <p>
-      Diseña tu propio contenedor, desbloquea opciones y gana PlayKoins
-      mientras construyes tu idea.
-    </p>
-  </section>
+<section class="hero">
+  <h1>BUILD YOUR <span>CONTAINER</span></h1>
+  <p>
+    Diseña tu propio contenedor, desbloquea opciones y gana
+    PlayKoins mientras construyes tu idea.
+  </p>
+</section>
 
-  <section class="game">
+<section class="game">
 
-    <div class="panel">
+<div class="panel">
 
-      <h2>🎮 Personaliza tu proyecto</h2>
+<h2>🎮 Personaliza tu proyecto</h2>
 
-      <div class="label">TAMAÑO</div>
-      <div class="options">
-        <button onclick="chooseSize(this,'20 FT')">20 FT</button>
-        <button onclick="chooseSize(this,'40 FT')">40 FT</button>
-        <button onclick="chooseSize(this,'45 FT')">45 FT</button>
-      </div>
+<span class="label">TAMAÑO</span>
+<div class="options">
+  <button onclick="selectSize(this,'20 FT')">20 FT</button>
+  <button onclick="selectSize(this,'40 FT')">40 FT</button>
+  <button onclick="selectSize(this,'45 FT')">45 FT</button>
+</div>
 
-      <div class="label">¿QUÉ QUIERES CONSTRUIR?</div>
-      <div class="options">
-        <button onclick="chooseUse(this,'Oficina')">🏢 Oficina</button>
-        <button onclick="chooseUse(this,'Casa')">🏠 Casa</button>
-        <button onclick="chooseUse(this,'Bar')">🍹 Bar</button>
-        <button onclick="chooseUse(this,'Tienda')">🛍️ Tienda</button>
-      </div>
+<span class="label">¿QUÉ QUIERES CONSTRUIR?</span>
+<div class="options">
+  <button onclick="selectType(this,'Oficina')">🏢 Oficina</button>
+  <button onclick="selectType(this,'Casa')">🏠 Casa</button>
+  <button onclick="selectType(this,'Bar')">🍹 Bar</button>
+  <button onclick="selectType(this,'Tienda')">🛍️ Tienda</button>
+  <button onclick="selectType(this,'Storage')">📦 Storage</button>
+</div>
 
-      <div class="label">MODIFICACIONES</div>
-      <div class="options">
-        <button onclick="addWindow(this)">🪟 Ventana</button>
-        <button onclick="addDoor(this)">🚪 Puerta</button>
-        <button onclick="reward(this,'❄️ A/C')">❄️ A/C</button>
-        <button onclick="reward(this,'⚡ Electricidad')">⚡ Electricidad</button>
-        <button onclick="reward(this,'🚿 Baño')">🚿 Baño</button>
-      </div>
+<span class="label">MODIFICACIONES</span>
+<div class="options">
+  <button onclick="toggleMod(this,'window')">🪟 Ventana</button>
+  <button onclick="toggleMod(this,'door')">🚪 Puerta</button>
+  <button onclick="toggleMod(this,'ac')">❄️ A/C</button>
+  <button onclick="toggleMod(this,'light')">⚡ Electricidad</button>
+  <button onclick="toggleMod(this,'bath')">🚿 Baño</button>
+</div>
 
-      <div class="status">
-        Tamaño: <strong id="size">Sin elegir</strong><br>
-        Proyecto: <strong id="use">Sin elegir</strong>
-      </div>
+<div class="summary">
+  Tamaño: <strong id="sizeText">Sin elegir</strong><br>
+  Proyecto: <strong id="typeText">Sin elegir</strong><br>
+  Modificaciones: <strong id="modsText">0</strong>
+</div>
 
-      <button class="finish" onclick="finishDesign()">
-        TERMINAR MI DISEÑO 🚀
-      </button>
+<div class="progress">
+  <div class="progress-bar" id="progress"></div>
+</div>
 
-    </div>
+<button class="finish" onclick="finishDesign()">
+  ✨ TERMINAR MI DISEÑO
+</button>
 
-    <div class="panel">
+<div class="quote" id="quote">
+  <h3>🔥 ¡Tu proyecto está listo!</h3>
+  <p>
+    Lo que acabas de diseñar puede convertirse en un proyecto real.
+    FranckoX puede ayudarte con la cotización.
+  </p>
+  <button class="quote-btn">
+    SOLICITAR COTIZACIÓN REAL
+  </button>
+</div>
 
-      <h2>🏗️ Tu contenedor</h2>
+</div>
 
-      <div class="container-stage">
-        <div class="shipping-container" id="container">
-          <div class="door" id="door"></div>
-          <div class="window" id="window"></div>
-        </div>
-      </div>
+<div class="panel preview">
 
-      <div class="status" id="message">
-        Empieza seleccionando el tamaño de tu contenedor.
-      </div>
+<h2>🏗️ Tu contenedor</h2>
 
-    </div>
+<div class="stage">
+  <div class="container-box" id="containerBox">
 
-  </section>
+    <div class="brand">PLAYCKOX</div>
+
+    <div class="window" id="window"></div>
+    <div class="door" id="door"></div>
+    <div class="ac" id="ac">A/C</div>
+    <div class="light" id="light"></div>
+    <div class="bath" id="bath">🚿 BAÑO</div>
+
+  </div>
+</div>
+
+<div class="message" id="message">
+  👆 Empieza seleccionando el tamaño de tu contenedor.
+</div>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="feature">
+  <h3>🪙 Gana PlayKoins</h3>
+  <p>
+    Completa diseños, retos y misiones para aumentar tu saldo virtual.
+  </p>
+</div>
+
+<div class="feature">
+  <h3>🏆 Sube de nivel</h3>
+  <p>
+    Desbloquea nuevas opciones y crea proyectos cada vez más completos.
+  </p>
+</div>
+
+<div class="feature">
+  <h3>🚀 De juego a realidad</h3>
+  <p>
+    Convierte el diseño que creaste jugando en una solicitud de cotización real.
+  </p>
+</div>
+
+</section>
 
 </main>
 
 <footer>
-  PlayCkoX • Powered by FranckoX
+  PlayCkoX • Entertainment & Interactive Experiences<br>
+  Powered by FranckoX
 </footer>
 
 <script>
-  let coins = 0;
-  let size = "";
-  let use = "";
 
-  function addCoins(amount) {
-    coins += amount;
-    document.getElementById("coins").textContent = coins;
-  }
+let size="";
+let type="";
+let mods=[];
+let coins=0;
 
-  function activate(button) {
+function clearGroup(button){
+  const group=button.parentElement;
+  group.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+}
+
+function selectSize(button,value){
+  clearGroup(button);
+  button.classList.add("active");
+  size=value;
+
+  document.getElementById("sizeText").innerText=value;
+
+  const box=document.getElementById("containerBox");
+  box.classList.remove("long","extra");
+
+  if(value==="40 FT") box.classList.add("long");
+  if(value==="45 FT") box.classList.add("extra");
+
+  reward(10,"📏 Tamaño seleccionado.");
+  updateProgress();
+}
+
+function selectType(button,value){
+  clearGroup(button);
+  button.classList.add("active");
+  type=value;
+
+  document.getElementById("typeText").innerText=value;
+
+  reward(20,"🏗️ Proyecto seleccionado: "+value+".");
+  updateProgress();
+}
+
+function toggleMod(button,id){
+
+  const element=document.getElementById(id);
+
+  if(button.classList.contains("active")){
+    button.classList.remove("active");
+    element.style.display="none";
+    mods=mods.filter(x=>x!==id);
+  }else{
     button.classList.add("active");
+    element.style.display="block";
+    mods.push(id);
+    reward(15,"🔧 Modificación añadida. +15 PlayKoins");
   }
 
-  function chooseSize(button, value) {
-    size = value;
-    document.getElementById("size").textContent = value;
+  document.getElementById("modsText").innerText=mods.length;
+  updateProgress();
+}
 
-    const container = document.getElementById("container");
+function reward(amount,text){
+  coins+=amount;
+  document.getElementById("coins").innerText=coins;
+  document.getElementById("message").innerHTML=text;
+}
 
-    if (value === "20 FT") container.style.width = "60%";
-    if (value === "40 FT") container.style.width = "80%";
-    if (value === "45 FT") container.style.width = "90%";
+function updateProgress(){
 
-    activate(button);
-    addCoins(25);
+  let value=10;
 
-    document.getElementById("message").innerHTML =
-      "✅ Seleccionaste <strong>" + value + "</strong>. +25 PlayKoins";
+  if(size) value+=25;
+  if(type) value+=25;
+
+  value+=mods.length*8;
+
+  if(value>100) value=100;
+
+  document.getElementById("progress").style.width=value+"%";
+}
+
+function finishDesign(){
+
+  if(!size || !type){
+    alert("Primero selecciona el tamaño y el tipo de proyecto.");
+    return;
   }
 
-  function chooseUse(button, value) {
-    use = value;
-    document.getElementById("use").textContent = value;
+  coins+=100;
+  document.getElementById("coins").innerText=coins;
 
-    activate(button);
-    addCoins(50);
+  document.getElementById("message").innerHTML=
+    "🎉 ¡Proyecto completado! Ganaste <strong>+100 PlayKoins</strong>.";
 
-    document.getElementById("message").innerHTML =
-      "🎯 Proyecto seleccionado: <strong>" + value + "</strong>. +50 PlayKoins";
-  }
+  document.getElementById("quote").style.display="block";
 
-  function addWindow(button) {
-    document.getElementById("window").style.display = "block";
-    reward(button, "🪟 Ventana");
-  }
+  document.getElementById("quote").scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+}
 
-  function addDoor(button) {
-    document.getElementById("door").style.display = "block";
-    reward(button, "🚪 Puerta");
-  }
-
-  function reward(button, item) {
-    if (!button.classList.contains("active")) {
-      activate(button);
-      addCoins(15);
-
-      document.getElementById("message").innerHTML =
-        item + " añadida. <strong>+15 PlayKoins</strong>";
-    }
-  }
-
-  function finishDesign() {
-    if (!size || !use) {
-      alert("Primero selecciona el tamaño y el tipo de proyecto.");
-      return;
-    }
-
-    addCoins(100);
-
-    document.getElementById("message").innerHTML =
-      "🏆 ¡Diseño completado! Ganaste <strong>+100 PlayKoins</strong>.<br><br>" +
-      "Tu " + use + " de " + size +
-      " está lista para el próximo nivel.<br><br>" +
-      "💼 Próximamente: <strong>Solicitar cotización real con FranckoX.</strong>";
-  }
 </script>
 
 </body>
-</html>p
+</html>
