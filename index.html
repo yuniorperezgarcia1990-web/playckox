@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlayCkoX | Juega • Aprende • Gana • Explora</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --gold:#ffc72c;
+  --gold2:#ff9f00;
+  --purple:#9c2cff;
+  --blue:#00a8ff;
+  --dark:#030711;
+  --card:#09101d;
+  --border:rgba(255,199,44,.28);
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(91,25,160,.25),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(0,120,255,.16),transparent 30%),
+    #030711;
+  color:white;
+  min-height:100vh;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* HEADER */
+
+header{
+  min-height:88px;
+  padding:12px 2%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid rgba(255,199,44,.25);
+  background:rgba(2,5,12,.96);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:42px;
+  font-weight:900;
+  font-style:italic;
+  letter-spacing:-3px;
+  white-space:nowrap;
+}
+
+.logo .play{
+  color:var(--gold);
+}
+
+.logo .x{
+  color:var(--gold);
+}
+
+.logo small{
+  display:block;
+  font-size:9px;
+  letter-spacing:4px;
+  font-style:normal;
+  text-align:center;
+  color:#ddd;
+  margin-top:2px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+
+.nav-item{
+  text-align:center;
+  font-size:13px;
+  color:#d7d9df;
+  transition:.2s;
+}
+
+.nav-item span{
+  display:block;
+  font-size:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover,
+.nav-item.active{
+  color:var(--gold);
+}
+
+.player{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:210px;
+}
+
+.avatar{
+  width:48px;
+  height:48px;
+  border:2px solid #ddd;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+}
+
+.player-info{
+  font-size:12px;
+  flex:1;
+}
+
+.points{
+  color:var(--gold);
+  font-weight:800;
+  font-size:16px;
+}
+
+.mini-progress{
+  height:7px;
+  border-radius:20px;
+  background:#12365e;
+  margin-top:6px;
+  overflow:hidden;
+}
+
+.mini-progress div{
+  width:62%;
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),#fff35b);
+}
+
+/* MAIN */
+
+.wrapper{
+  width:min(1500px,97%);
+  margin:auto;
+}
+
+/* HERO */
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:16px;
+  margin-top:16px;
+}
+
+.hero{
+  min-height:380px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  padding:45px;
+  background:
+    linear-gradient(90deg,rgba(2,5,12,.97) 0%,rgba(2,5,12,.72) 48%,rgba(2,5,12,.15) 100%),
+    radial-gradient(circle at 78% 45%,rgba(255,127,0,.55),transparent 17%),
+    radial-gradient(circle at 65% 55%,rgba(139,39,255,.45),transparent 23%),
+    linear-gradient(135deg,#07152a,#28104a 55%,#8b3100);
+  box-shadow:0 0 40px rgba(255,155,0,.08);
+}
+
+.hero::after{
+  content:"🎮  🏆  🪙  🧠  📦  🚚";
+  position:absolute;
+  right:5%;
+  bottom:21%;
+  font-size:64px;
+  transform:rotate(-4deg);
+  filter:drop-shadow(0 0 18px #ff8a00);
+  opacity:.92;
+}
+
+.hero-content{
+  max-width:650px;
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  color:#65d8ff;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.hero h1{
+  font-size:64px;
+  line-height:.95;
+  font-weight:1000;
+  text-transform:uppercase;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  font-size:20px;
+  max-width:580px;
+  line-height:1.35;
+  margin:18px 0 25px;
+  color:#eee;
+}
+
+.primary-btn{
+  display:inline-block;
+  padding:16px 31px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#ffe066,#ffae00);
+  color:#111;
+  font-weight:900;
+  font-size:16px;
+  box-shadow:0 8px 25px rgba(255,174,0,.22);
+  transition:.2s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* PROGRESS */
+
+.progress-card{
+  border:1px solid rgba(80,166,255,.32);
+  background:linear-gradient(160deg,#091321,#050914);
+  border-radius:20px;
+  padding:22px;
+}
+
+.progress-card h3{
+  font-size:20px;
+  margin-bottom:18px;
+}
+
+.level{
+  font-size:24px;
+  font-weight:900;
+}
+
+.big-progress{
+  height:15px;
+  border-radius:30px;
+  background:#12345b;
+  margin:12px 0 8px;
+  overflow:hidden;
+}
+
+.big-progress div{
+  width:62%;
+  height:100%;
+  background:linear-gradient(90deg,#ffbf00,#fff16b);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:22px;
+}
+
+.stat{
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:14px;
+  padding:17px 8px;
+  text-align:center;
+  background:rgba(255,255,255,.025);
+}
+
+.stat strong{
+  display:block;
+  color:var(--gold);
+  font-size:24px;
+  margin-bottom:4px;
+}
+
+.profile-btn{
+  display:block;
+  margin-top:20px;
+  padding:14px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#10baff,#0074e8);
+  text-align:center;
+  font-weight:900;
+}
+
+/* SECTIONS */
+
+.section{
+  margin-top:18px;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  font-size:22px;
+}
+
+.section-title p{
+  color:#aaa;
+  font-size:13px;
+}
+
+/* GAME CARDS */
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:10px;
+}
+
+.game{
+  min-height:255px;
+  border:1px solid rgba(183,60,255,.38);
+  border-radius:15px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#101425,#070a12);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  transition:.2s;
+}
+
+.game:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 25px rgba(157,44,255,.25);
+}
+
+.game-art{
+  min-height:125px;
+  display:grid;
+  place-items:center;
+  font-size:60px;
+  background:
+    radial-gradient(circle,rgba(179,49,255,.38),transparent 48%),
+    linear-gradient(145deg,#1d0b2d,#091426);
+}
+
+.game:nth-child(1) .game-art,
+.game:nth-child(2) .game-art,
+.game:nth-child(7) .game-art,
+.game:nth-child(8) .game-art{
+  background:
+    radial-gradient(circle,rgba(255,154,0,.45),transparent 48%),
+    linear-gradient(145deg,#261006,#090b12);
+}
+
+.game-body{
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  text-align:center;
+}
+
+.game h3{
+  font-size:17px;
+  color:#fff;
+  margin-bottom:7px;
+}
+
+.game p{
+  color:#c5c5c5;
+  font-size:12px;
+  line-height:1.3;
+  margin-bottom:12px;
+  flex:1;
+}
+
+.game-btn{
+  display:block;
+  padding:10px 6px;
+  background:linear-gradient(#ffe267,#ffae00);
+  color:#111;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:900;
+}
+
+/* REAL SERVICES */
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.service{
+  min-height:165px;
+  border-radius:15px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  position:relative;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.12)),
+    linear-gradient(135deg,#134369,#10121a);
+}
+
+.service:nth-child(2){
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.12)),
+    linear-gradient(135deg,#4b1f65,#12121b);
+}
+
+.service:nth-child(3){
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.12)),
+    linear-gradient(135deg,#164b35,#12121b);
+}
+
+.service:nth-child(4){
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.12)),
+    linear-gradient(135deg,#5a3514,#12121b);
+}
+
+.service-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.service h3{
+  color:var(--gold);
+  font-size:16px;
+}
+
+.service p{
+  font-size:12px;
+  margin-top:5px;
+  color:#ddd;
+}
+
+/* CASINO */
+
+.coming{
+  margin-top:18px;
+  border:1px solid rgba(255,30,136,.42);
+  border-radius:18px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 90% 50%,rgba(255,0,92,.3),transparent 25%),
+    linear-gradient(135deg,#24052c,#090813);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.coming h2{
+  font-size:35px;
+}
+
+.coming h2 span{
+  color:#ff398c;
+}
+
+.coming p{
+  color:#bbb;
+  margin-top:5px;
+}
+
+.slot{
+  font-size:55px;
+}
+
+/* FOOTER FEATURES */
+
+.features{
+  margin:20px 0;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:15px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  overflow:hidden;
+}
+
+.feature{
+  padding:17px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.1);
+  font-size:12px;
+  color:#bbb;
+}
+
+.feature:last-child{
+  border-right:none;
+}
+
+.feature strong{
+  display:block;
+  color:white;
+  font-size:14px;
+  margin:5px 0;
+}
+
+.feature-icon{
+  color:var(--gold);
+  font-size:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:1150px){
+  .games{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  nav{
+    display:none;
+  }
+}
+
+@media(max-width:800px){
+  header{
+    min-height:72px;
+    padding:10px 4%;
+  }
+
+  .logo{
+    font-size:28px;
+  }
+
+  .logo small{
+    font-size:6px;
+  }
+
+  .player{
+    min-width:auto;
+  }
+
+  .avatar{
+    display:none;
+  }
+
+  .player-info div:first-child{
+    display:none;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    min-height:470px;
+    padding:30px 22px;
+    align-items:flex-start;
+  }
+
+  .hero::after{
+    right:3%;
+    bottom:8%;
+    font-size:39px;
+  }
+
+  .eyebrow{
+    font-size:14px;
+  }
+
+  .hero h1{
+    font-size:45px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .progress-card{
+    display:none;
+  }
+
+  .games{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .services{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .features{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .feature{
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+
+  .coming h2{
+    font-size:26px;
+  }
+}
+
+@media(max-width:480px){
+  .games{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .game{
+    min-height:240px;
+  }
+
+  .game-art{
+    min-height:110px;
+    font-size:52px;
+  }
+
+  .services{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:39px;
+  }
+
+  .coming{
+    align-items:flex-start;
+  }
+
+  .slot{
+    font-size:36px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    <span class="play">Play</span>Cko<span class="x">X</span>
+    <small>JUEGA • APRENDE • GANA • EXPLORA</small>
+  </div>
+
+  <nav>
+    <a class="nav-item active" href="#">
+      <span>🏠</span>Inicio
+    </a>
+
+    <a class="nav-item" href="#juegos">
+      <span>🎮</span>Juegos
+    </a>
+
+    <a class="nav-item" href="#juegos">
+      <span>🏆</span>Desafíos
+    </a>
+
+    <a class="nav-item" href="#servicios">
+      <span>🎁</span>Recompensas
+    </a>
+
+    <a class="nav-item" href="#servicios">
+      <span>🛍️</span>Negocios
+    </a>
+
+    <a class="nav-item" href="#">
+      <span>👥</span>Comunidad
+    </a>
+  </nav>
+
+  <div class="player">
+    <div class="avatar">👤</div>
+
+    <div class="player-info">
+      <div>Hola, Jugador</div>
+      <div class="points">🪙 1,250 Puntos</div>
+
+      <div class="mini-progress">
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+
+<main class="wrapper">
+
+  <section class="hero-grid">
+
+    <div class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          JUEGA • DESCUBRE • GANA
+        </div>
+
+        <h1>
+          EXPLORA<br>
+          <span>UN MUNDO REAL</span>
+        </h1>
+
+        <p>
+          Diviértete, gana puntos y descubre productos,
+          negocios y servicios que puedes usar en la vida real.
+        </p>
+
+        <a class="primary-btn" href="#juegos">
+          COMENZAR AHORA →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <aside class="progress-card">
+
+      <h3>Tu Progreso</h3>
+
+      <div class="level">Nivel 3</div>
+
+      <div class="big-progress">
+        <div></div>
+      </div>
+
+      <small>1,250 / 2,000 puntos</small>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>♛</strong>
+          Nivel 3
+        </div>
+
+        <div class="stat">
+          <strong>1,250</strong>
+          Puntos
+        </div>
+
+        <div class="stat">
+          <strong>5</strong>
+          Desafíos
+        </div>
+
+        <div class="stat">
+          <strong>2</strong>
+          Recompensas
+        </div>
+
+      </div>
+
+      <a class="profile-btn" href="#">
+        VER MI PERFIL →
+      </a>
+
+    </aside>
+
+  </section>
+
+
+  <section class="section" id="juegos">
+
+    <div class="section-title">
+      <div>
+        <h2>NUESTROS JUEGOS</h2>
+        <p>Juega gratis, gana puntos y descubre nuevas oportunidades.</p>
+      </div>
+    </div>
+
+
+    <div class="games">
+
+      <article class="game">
+        <div class="game-art">🎡</div>
+        <div class="game-body">
+          <h3>SPIN & WIN</h3>
+          <p>Gira la ruleta y gana puntos y premios.</p>
+          <a class="game-btn" href="#">PRÓXIMAMENTE</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">🎫</div>
+        <div class="game-body">
+          <h3>SCRATCH & WIN</h3>
+          <p>Raspa y descubre premios al instante.</p>
+          <a class="game-btn" href="#">PRÓXIMAMENTE</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">🧠</div>
+        <div class="game-body">
+          <h3>TRIVIA CHALLENGE</h3>
+          <p>Pon a prueba tus conocimientos y gana puntos.</p>
+          <a class="game-btn" href="#">PRÓXIMAMENTE</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">📦</div>
+        <div class="game-body">
+          <h3>BUILD YOUR CONTAINER</h3>
+          <p>Diseña tu contenedor ideal y gana PlayKoins.</p>
+
+          <a class="game-btn" href="build-container.html">
+            JUGAR
+          </a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">💻</div>
+        <div class="game-body">
+          <h3>WEB DESIGN</h3>
+          <p>Crea páginas web y supera desafíos.</p>
+          <a class="game-btn" href="#">PRÓXIMAMENTE</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">🛠️</div>
+        <div class="game-body">
+          <h3>HOME & BUSINESS</h3>
+          <p>Retos de servicios para hogar y negocios.</p>
+          <a class="game-btn" href="#">PRÓXIMAMENTE</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">🎁</div>
+        <div class="game-body">
+          <h3>RECOMPENSA DIARIA</h3>
+          <p>Regresa cada día y consigue puntos.</p>
+          <a class="game-btn" href="#">RECLAMAR</a>
+        </div>
+      </article>
+
+
+      <article class="game">
+        <div class="game-art">🏆</div>
+        <div class="game-body">
+          <h3>RANKING PLAYCKOX</h3>
+          <p>Sube de nivel y compite con la comunidad.</p>
+          <a class="game-btn" href="#">VER RANKING</a>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <section class="section" id="servicios">
+
+    <div class="section-title">
+      <div>
+        <h2>DESCUBRE PRODUCTOS Y SERVICIOS REALES</h2>
+        <p>Lo que descubres jugando también puede existir en la vida real.</p>
+      </div>
+    </div>
+
+
+    <div class="services">
+
+      <div class="service">
+        <div class="service-icon">📦</div>
+        <h3>CONTENEDORES</h3>
+        <p>Venta • Renta • Modificaciones</p>
+        <p>Con AYG Transport Service Inc.</p>
+      </div>
+
+
+      <div class="service">
+        <div class="service-icon">💻</div>
+        <h3>WEB DESIGN</h3>
+        <p>Sitios web profesionales para tu negocio.</p>
+        <p>Con FranckoX</p>
+      </div>
+
+
+      <div class="service">
+        <div class="service-icon">🛠️</div>
+        <h3>SERVICIOS PARA HOGAR Y NEGOCIO</h3>
+        <p>Limpieza • Jardinería • Handyman</p>
+        <p>Con FranckoX</p>
+      </div>
+
+
+      <div class="service">
+        <div class="service-icon">🚚</div>
+        <h3>ENTREGAS Y LOGÍSTICA</h3>
+        <p>Delivery • Transporte • Soluciones</p>
+        <p>Con FranckoX</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="coming">
+
+    <div>
+      <h2>CASINO <span>PRÓXIMAMENTE</span></h2>
+
+      <p>
+        Una nueva zona de entretenimiento está en desarrollo.
+      </p>
+    </div>
+
+    <div class="slot">🎰 👑</div>
+
+  </section>
+
+
+  <section class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🎮</div>
+      <strong>100% Gratis para Jugar</strong>
+      Sin depósito requerido
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <strong>Aprende Jugando</strong>
+      Contenido y desafíos
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">👥</div>
+      <strong>Comunidad Global</strong>
+      Juega y comparte
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🎁</div>
+      <strong>Gana Puntos</strong>
+      Desbloquea niveles
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <strong>PlayCkoX</strong>
+      Juega • Aprende • Explora
+    </div>
+
+  </section>
+
+</main>
+
+</body>
+</html>
